@@ -41,12 +41,12 @@
   <div class="story-card"><div class="story-title">💡 Main Idea</div><div class="question-box">What is the main idea of this story?</div><div class="choice-list"><button class="q-choice" data-n="1" onclick="selectMainChoice(this)">a. A child goes to see a 3-D movie.</button><button class="q-choice" data-n="2" onclick="selectMainChoice(this)">b. Alice in Wonderland is now in 3-D.</button><button class="q-choice" data-n="3" onclick="selectMainChoice(this)">c. 3-D movies can make you feel dizzy.</button></div><button class="primary-btn" onclick="checkMainProblem()">정답 확인하고 문장별 해석 보기</button><div id="main-result" class="result-box"></div><div id="line-explain" class="explain-wrap"></div></div>
 </div>
 <div id="word-sec" class="section"><div id="word-intro" class="intro-wrap"><div class="intro-icon">🕶️</div><h2>3D 영화 단어 테스트</h2><p>핵심 단어를 맞히며<br>본문 내용을 익혀 보세요.</p><button class="primary-btn" onclick="initAudio();startWord()">테스트 시작 🚀</button></div><div id="word-quiz" style="display:none"><div class="status-row"><span class="status-badge" id="w-status"></span><button class="stop-btn" onclick="finishWord(true)">중간 채점</button></div><div class="evo-box"><div class="evo-emoji" id="wevo-e">🎟️</div><div class="evo-name" id="wevo-n"></div><div class="prog-bg"><div class="prog-bar" id="wevo-b"></div></div></div><div class="word-display" id="w-en"></div><div class="options-grid" id="w-opts"></div></div><div id="word-result" style="display:none;text-align:center"><div class="intro-icon">🏆</div><h2 style="color:var(--main)">테스트 종료!</h2><div class="word-display" id="w-score">100점</div><div class="status-badge" id="w-detail"></div><button class="primary-btn" onclick="resetWord()">다시 시작 🔄</button></div></div>
-<div id="dict-sec" class="section"><div class="evo-box"><div class="evo-emoji" id="devo-e">🎟️</div><div class="evo-name" id="devo-n"></div><div class="prog-bg"><div class="prog-bar" id="devo-b"></div></div></div><span class="status-badge" id="d-status"></span><div class="ko-meaning" id="d-ko"></div><div class="drag-tip">낱말을 눌러 순서대로 놓아 문장을 완성하세요. 구두점은 제외되며, 맞으면 바로 다음 구간으로 이동합니다.</div><div id="answer-area"></div><div id="scramble-area"></div><div class="audio-row"><button id="speed-btn" class="audio-btn speed-btn" onclick="toggleSpeed()">🇺🇸 보통</button><button id="play-btn" class="audio-btn play-btn" onclick="toggleAudio()">⏸️ 일시정지</button></div></div>
+<div id="dict-sec" class="section"><div class="evo-box"><div class="evo-emoji" id="devo-e">🎟️</div><div class="evo-name" id="devo-n"></div><div class="prog-bg"><div class="prog-bar" id="devo-b"></div></div></div><span class="status-badge" id="d-status"></span><div class="ko-meaning" id="d-ko"></div><div class="drag-tip">낱말을 눌러 순서대로 놓아 <b>한 문장씩</b> 완성하세요. 구두점은 제외되며, 맞으면 바로 다음 문장으로 이동합니다.</div><div id="answer-area"></div><div id="scramble-area"></div><div class="audio-row"><button id="speed-btn" class="audio-btn speed-btn" onclick="toggleSpeed()">🇺🇸 보통</button><button id="play-btn" class="audio-btn play-btn" onclick="toggleAudio()">⏸️ 일시정지</button></div></div>
 <div id="grammar-sec" class="section"><div class="evo-box"><div class="evo-emoji" id="gevo-e">🎟️</div><div class="evo-name" id="gevo-n"></div><div class="prog-bg"><div class="prog-bar" id="gevo-b"></div></div></div><div class="status-row"><span class="status-badge" id="g-status"></span><button class="stop-btn" onclick="renderGrammar()">처음으로</button></div><div id="grammar-box"></div></div>
 <div id="hist-sec" class="section"><h3 style="color:var(--main);margin-top:0">📘 학습 기록</h3><div id="hist-list"></div></div>
 </div>
 <script>
-const STORE='sr_my_first_3d_movie_v1';
+const STORE='sr_my_first_3d_movie_sentence_v2';
 const wordList = [
   {
     "en": "watch",
@@ -175,16 +175,8 @@ const sentenceList = [
     "koFull": "오늘 나는 나의 첫 3D 영화인 『이상한 나라의 앨리스』를 보았다.",
     "parts": [
       {
-        "en": "Today I watched",
-        "ko": "오늘 나는 보았다"
-      },
-      {
-        "en": "my first 3 D movie",
-        "ko": "나의 첫 3D 영화를"
-      },
-      {
-        "en": "Alice in Wonderland",
-        "ko": "이상한 나라의 앨리스를"
+        "en": "Today I watched my first 3-D movie Alice in Wonderland",
+        "ko": "오늘 나는 나의 첫 3D 영화인 『이상한 나라의 앨리스』를 보았다."
       }
     ]
   },
@@ -193,16 +185,8 @@ const sentenceList = [
     "koFull": "내가 영화관에 앉았을 때, 나는 특별한 3D 안경을 썼다.",
     "parts": [
       {
-        "en": "When I sat down",
-        "ko": "내가 앉았을 때"
-      },
-      {
-        "en": "in the movie theater",
-        "ko": "영화관에"
-      },
-      {
-        "en": "I put on special 3 D glasses",
-        "ko": "나는 특별한 3D 안경을 썼다"
+        "en": "When I sat down in the movie theater I put on special 3-D glasses",
+        "ko": "내가 영화관에 앉았을 때, 나는 특별한 3D 안경을 썼다."
       }
     ]
   },
@@ -211,16 +195,8 @@ const sentenceList = [
     "koFull": "처음에는 나는 조금 어지러워서 3D 안경을 벗었다.",
     "parts": [
       {
-        "en": "At first",
-        "ko": "처음에는"
-      },
-      {
-        "en": "I felt a bit dizzy",
-        "ko": "나는 조금 어지러웠다"
-      },
-      {
-        "en": "so I took off my 3 D glasses",
-        "ko": "그래서 나는 3D 안경을 벗었다"
+        "en": "At first I felt a bit dizzy so I took off my 3-D glasses",
+        "ko": "처음에는 나는 조금 어지러워서 3D 안경을 벗었다."
       }
     ]
   },
@@ -229,16 +205,8 @@ const sentenceList = [
     "koFull": "하지만 화면은 하나 대신 두 개의 이미지를 보여 주었다.",
     "parts": [
       {
-        "en": "But the screen showed",
-        "ko": "하지만 화면은 보여 주었다"
-      },
-      {
-        "en": "two images",
-        "ko": "두 개의 이미지를"
-      },
-      {
-        "en": "instead of one",
-        "ko": "하나 대신에"
+        "en": "But the screen showed two images instead of one",
+        "ko": "하지만 화면은 하나 대신 두 개의 이미지를 보여 주었다."
       }
     ]
   },
@@ -247,16 +215,8 @@ const sentenceList = [
     "koFull": "나는 3D 안경을 다시 쓰기로 결심했다.",
     "parts": [
       {
-        "en": "I decided",
-        "ko": "나는 결심했다"
-      },
-      {
-        "en": "to put my 3 D glasses",
-        "ko": "나의 3D 안경을"
-      },
-      {
-        "en": "back on",
-        "ko": "다시 쓰기로"
+        "en": "I decided to put my 3-D glasses back on",
+        "ko": "나는 3D 안경을 다시 쓰기로 결심했다."
       }
     ]
   },
@@ -265,30 +225,18 @@ const sentenceList = [
     "koFull": "그때 나는 크게 놀랐다.",
     "parts": [
       {
-        "en": "Then I got",
-        "ko": "그때 나는 얻었다"
-      },
-      {
-        "en": "a big surprise",
-        "ko": "큰 놀라움을"
+        "en": "Then I got a big surprise",
+        "ko": "그때 나는 크게 놀랐다."
       }
     ]
   },
   {
     "full": "The 3-D images on the screen looked amazing!",
-    "koFull": "화면의 3D 영상들은 놀라워 보였다!",
+    "koFull": "화면의 3D 이미지들은 놀라워 보였다.",
     "parts": [
       {
-        "en": "The 3 D images",
-        "ko": "3D 영상들은"
-      },
-      {
-        "en": "on the screen",
-        "ko": "화면의"
-      },
-      {
-        "en": "looked amazing",
-        "ko": "놀라워 보였다"
+        "en": "The 3-D images on the screen looked amazing",
+        "ko": "화면의 3D 이미지들은 놀라워 보였다."
       }
     ]
   },
@@ -297,84 +245,48 @@ const sentenceList = [
     "koFull": "등장인물들은 살아 있는 것처럼 보였다.",
     "parts": [
       {
-        "en": "The characters",
-        "ko": "등장인물들은"
-      },
-      {
-        "en": "seemed like",
-        "ko": "~처럼 보였다"
-      },
-      {
-        "en": "living things",
-        "ko": "살아 있는 것들"
+        "en": "The characters seemed like living things",
+        "ko": "등장인물들은 살아 있는 것처럼 보였다."
       }
     ]
   },
   {
     "full": "They seemed to come out of the screen and into the theater.",
-    "koFull": "그들은 화면에서 나와 영화관 안으로 들어오는 것처럼 보였다.",
+    "koFull": "그들은 화면 밖으로 나와 극장 안으로 들어오는 것처럼 보였다.",
     "parts": [
       {
-        "en": "They seemed",
-        "ko": "그들은 ~처럼 보였다"
-      },
-      {
-        "en": "to come out of the screen",
-        "ko": "화면에서 나오는 것처럼"
-      },
-      {
-        "en": "and into the theater",
-        "ko": "그리고 영화관 안으로 들어오는 것처럼"
+        "en": "They seemed to come out of the screen and into the theater",
+        "ko": "그들은 화면 밖으로 나와 극장 안으로 들어오는 것처럼 보였다."
       }
     ]
   },
   {
     "full": "When Alice fell into the rabbit hole, I felt like I was falling with her.",
-    "koFull": "앨리스가 토끼굴로 떨어졌을 때, 나는 그녀와 함께 떨어지고 있는 것처럼 느꼈다.",
+    "koFull": "앨리스가 토끼 굴로 떨어졌을 때, 나는 그녀와 함께 떨어지는 것처럼 느꼈다.",
     "parts": [
       {
-        "en": "When Alice fell into the rabbit hole",
-        "ko": "앨리스가 토끼굴로 떨어졌을 때"
-      },
-      {
-        "en": "I felt like",
-        "ko": "나는 ~처럼 느꼈다"
-      },
-      {
-        "en": "I was falling with her",
-        "ko": "내가 그녀와 함께 떨어지고 있는 것처럼"
+        "en": "When Alice fell into the rabbit hole I felt like I was falling with her",
+        "ko": "앨리스가 토끼 굴로 떨어졌을 때, 나는 그녀와 함께 떨어지는 것처럼 느꼈다."
       }
     ]
   },
   {
     "full": "During the movie, my heart was beating fast with excitement.",
-    "koFull": "영화가 진행되는 동안, 내 심장은 흥분으로 빠르게 뛰고 있었다.",
+    "koFull": "영화를 보는 동안, 내 심장은 흥분으로 빠르게 뛰고 있었다.",
     "parts": [
       {
-        "en": "During the movie",
-        "ko": "영화가 진행되는 동안"
-      },
-      {
-        "en": "my heart was beating fast",
-        "ko": "내 심장은 빠르게 뛰고 있었다"
-      },
-      {
-        "en": "with excitement",
-        "ko": "흥분으로"
+        "en": "During the movie my heart was beating fast with excitement",
+        "ko": "영화를 보는 동안, 내 심장은 흥분으로 빠르게 뛰고 있었다."
       }
     ]
   },
   {
     "full": "Now I love 3-D movies!",
-    "koFull": "이제 나는 3D 영화를 정말 좋아한다!",
+    "koFull": "이제 나는 3D 영화를 좋아한다.",
     "parts": [
       {
-        "en": "Now I love",
-        "ko": "이제 나는 정말 좋아한다"
-      },
-      {
-        "en": "3 D movies",
-        "ko": "3D 영화들을"
+        "en": "Now I love 3-D movies",
+        "ko": "이제 나는 3D 영화를 좋아한다."
       }
     ]
   }
